@@ -1,0 +1,5 @@
+SUNDIALS_LIB=cvode
+
+TEST_TYPES="CXX_serial CXX_parallel C_openmp parhyp petsc"
+
+debian/tests/run_sundials_examples $SUNDIALS_LIB "$TEST_TYPES"

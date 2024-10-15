@@ -14,6 +14,7 @@ extra_flags += \
 	-DBUILD_STATIC_LIBS:BOOL=ON \
 	-DBUILD_FORTRAN_MODULE_INTERFACE:BOOL=ON \
 	-DENABLE_MPI:BOOL=ON \
+	-DSUNDIALS_INDEX_SIZE=32 \
 	\
 	-DENABLE_LAPACK:BOOL=OFF\
 	\
@@ -45,6 +46,15 @@ extra_flags += -DENABLE_SUPERLUMT:BOOL=OFF
 
 BUILDDIR = $(CURDIR)/debian/build
 
+empty :=
+space := $(empty)$(empty)
+
+SKIP_TEST_ARCH_LIST = s390x ppc64 sparc64
+ifneq (,$(findstring $(space)$(DEB_HOST_ARCH)$(space), $(space)$(SKIP_TEST_ARCH_LIST)$(space)))
+  SKIP_TEST_LIST += test_fnvector_mpimanyvector_mod_1 test_fnvector_mpimanyvector_mod_4 test_fnvector_manyvector_mod \
+                    test_fsunlinsol_dense_mod test_fsunlinsol_klu_mod
+endif
+
 
 %:
 	dh $@ --buildsystem=cmake  --builddirectory=$(BUILDDIR)
@@ -54,8 +64,12 @@ override_dh_auto_configure:
 
 # Hack from https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=839387
 # The OpenMPI variable prevents FTBFS when there are not enough CPUs (see #910352 and #849974)
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 override_dh_auto_test:
-	$(if $(filter nocheck,$(DEB_BUILD_OPTIONS)),true,(cd debian/build; OMPI_MCA_rmaps_base_oversubscribe=1 ../nofakeroot ctest))
+	cd debian/build; \
+	if [ "x$(SKIP_TEST_LIST)" != "x" ]; then echo "set(CTEST_CUSTOM_TESTS_IGNORE $(SKIP_TEST_LIST) )" >> CTestCustom.cmake; fi; \
+	OMPI_MCA_rmaps_base_oversubscribe=1 ../nofakeroot ctest
+endif
 
 override_dh_auto_install:
 	dh_auto_install

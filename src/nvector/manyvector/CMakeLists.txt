@@ -3,7 +3,7 @@
 #                and Cody J. Balos @ LLNL
 # ---------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -26,8 +26,8 @@ if(BUILD_NVECTOR_MANYVECTOR)
       ${SUNDIALS_SOURCE_DIR}/include/nvector/nvector_manyvector.h
     INCLUDE_SUBDIR
       nvector
-    OBJECT_LIBRARIES
-      sundials_generic_obj
+    LINK_LIBRARIES
+      PUBLIC sundials_core
     OUTPUT_NAME
       sundials_nvecmanyvector
     VERSION
@@ -59,8 +59,8 @@ if(BUILD_NVECTOR_MPIMANYVECTOR)
       ${SUNDIALS_SOURCE_DIR}/include/nvector/nvector_mpimanyvector.h
     INCLUDE_SUBDIR
       nvector
-    OBJECT_LIBRARIES
-      sundials_generic_obj
+    LINK_LIBRARIES
+      PUBLIC sundials_core
     COMPILE_DEFINITIONS
       PRIVATE MANYVECTOR_BUILD_WITH_MPI
     OUTPUT_NAME
@@ -76,5 +76,5 @@ endif()
 
 # Add F2003 module if the interface is enabled
 if(BUILD_FORTRAN_MODULE_INTERFACE)
-  add_subdirectory(fmod)
+  add_subdirectory("fmod_int${SUNDIALS_INDEX_SIZE}")
 endif()

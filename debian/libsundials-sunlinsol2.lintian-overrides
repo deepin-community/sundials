@@ -1,2 +1,0 @@
-libsundials-sunlinsol2 binary: package-name-doesnt-match-sonames
-libsundials-sunlinsol2 binary: library-not-linked-against-libc

@@ -3,7 +3,7 @@
 # Programmer(s): Cody J. Balos and David J. Gardner @ LLNL
 # ------------------------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -104,11 +104,7 @@ spack load "${compiler}"
 # make sure spack knows about the compiler
 spack compiler find
 
-if [ "$SUNDIALS_TPLS" == "ON" ]; then
-  spack load cmake@3.18.6
-else
-  spack load cmake@3.12.4
-fi
+spack load cmake@3.18.6
 
 # add CUDA
 if [[ ":${PATH}:" != *":/usr/local/cuda-11.5/bin:"* ]]; then
@@ -143,12 +139,6 @@ if [ "$compilername" == "gcc" ]; then
         export CUDAFLAGS="-g -O3"
     fi
 
-    # append additional warning flags
-    if [[ "$SUNDIALS_PRECISION" == "double" && "$SUNDIALS_INDEX_SIZE" == "32" ]]; then
-        export CFLAGS="${CFLAGS} -Wconversion -Wno-sign-conversion"
-        export CXXFLAGS="${CXXFLAGS} -Wconversion -Wno-sign-conversion"
-    fi
-
 else
 
     COMPILER_ROOT="$(spack location -i "llvm@$compilerversion")"
@@ -175,6 +165,8 @@ fi
 # Verbose build
 export CMAKE_VERBOSE_MAKEFILE=OFF
 
+export CMAKE_BUILD_TYPE=Debug
+
 # Number of build and test jobs
 export SUNDIALS_BUILD_JOBS=6
 export SUNDIALS_TEST_JOBS=1
@@ -189,7 +181,7 @@ export SUNDIALS_KINSOL=ON
 
 # Fortran interface status
 if [ "$compilername" == "gcc" ]; then
-    if [[ ("$SUNDIALS_PRECISION" == "double") && ("$SUNDIALS_INDEX_SIZE" == "64") ]]; then
+    if [[ ("$SUNDIALS_PRECISION" == "double") ]]; then
         export SUNDIALS_FMOD_INTERFACE=ON
     else
         export SUNDIALS_FMOD_INTERFACE=OFF
@@ -209,7 +201,6 @@ export SUNDIALS_PROFILING=ON
 
 # Sundials logging
 export SUNDIALS_LOGGING_LEVEL=3
-export SUNDIALS_LOGGING_ENABLE_MPI=ON
 
 # Uncomment to override the default output file comparison precisions. The float
 # precision is number of digits to compare (0 = all digits) and the integer

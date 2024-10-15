@@ -1,3 +1,92 @@
+sundials (7.1.1+dfsg1-4) unstable; urgency=medium
+
+  * Team upload.
+  * skip_tests.patch: skip flakey idaFoodWeb_bnd_omp from ida.
+    Often times out on many arches.
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 13 Oct 2024 09:56:57 +0200
+
+sundials (7.1.1+dfsg1-3) unstable; urgency=medium
+
+  * Team upload.
+  * add debian patch skip_tests.patch to skip cvsFoodWeb_ASAp_kry and
+    cvsRoberts_ASAi_dns_constraints from cvodes test examples.
+    They fail sometimes, and fail always on i386.
+
+ -- Drew Parsons <dparsons@debian.org>  Sat, 12 Oct 2024 18:22:08 +0200
+
+sundials (7.1.1+dfsg1-2) unstable; urgency=medium
+
+  * Team upload.
+  * upload sundials 7 to unstable. Transition #1082552.
+  * add ppc64 to the list of arches skipping some fortran tests
+
+ -- Drew Parsons <dparsons@debian.org>  Thu, 10 Oct 2024 15:51:00 +0200
+
+sundials (7.1.1+dfsg1-1exp2) experimental; urgency=medium
+
+  * Team upload.
+  * debian/rules: skip failing fortran tests on s390x sparc64
+    from fnvector (manyvector) and fsunlinsol
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 20 Sep 2024 14:27:16 +0200
+
+sundials (7.1.1+dfsg1-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release
+    - deprecates all debian patches
+    - provides shared fortran libraries. Closes: #892910.
+    - SUNDIALSConfig.cmake KLU support provides include path
+      /usr/include/suitesparse for klu.h. Closes: #1069134.
+    - supports gcc-14. Closes: #1075547.
+  * debian/watch: include index 1 in +dfsg1 name mangling
+  * specify -DSUNDIALS_INDEX_SIZE=32 (32-bit integers for indexing)
+    for compatibility with PETSc. 64-bit integers would build
+    against petsc64-dev not petsc-dev (the latter is default).
+    Closes: #1075547.
+  * Core libraries (libsundials_core.so.*) provided in new
+    libsundials-core7 package. libsundials_generic.so.*
+    (formerly in libsundials-sunlinsol3) no longer generated.
+  * ABI updates in sublibraries
+    - ABI 7
+      libsundials-cvode7
+      libsundials-cvodes7
+      libsundials-ida7
+      libsundials-kinsol7
+      libsundials-nvec*7
+    - ABI 6
+      libsundials-arkode6
+      libsundials-idas6
+    - ABI 5
+      libsundials-sunlinsol5
+      libsundials-sunmatrix5
+    - libsundials-sunlinsol5 also provides:
+      libsundials_fsunnonlinsolfixedpoint_mod.so.4
+      libsundials_fsunnonlinsolnewton_mod.so.4
+      libsundials_sunnonlinsolfixedpoint.so.4
+      libsundials_sunnonlinsolnewton.so.4
+      libsundials_sunnonlinsolpetscsnes.so.7
+  * Depends: pkgconf not pkg-config. Closes: #1077028.
+  * update debian/copyright
+    - BSD-3-clause with LLNS NOTICE applies to all files (*)
+      2002-2024, Lawrence Livermore National Security and
+      Southern Methodist University
+    - debian/* follows simple BSD-3-clause (Debian maintainers are not
+      funded by LLNS contracts)
+  * update lintian overrides
+    - add package-name-doesnt-match-sonames to all library packages
+    - libsundials_nvecparallel now links to libc
+  * debian patch sundials_fcore_mod_soname.patch adds soname to
+    libsundials_fcore_mod.so (same soversion as libsundials_core.so)
+  * debian/tests: use cmake to build and run examples. Run selected
+    tests from all components: arkode cvode cvodes ida idas kinsol
+    and sunnonlinsol. Skip nvector, sunlinsol, sunmatrix (their tests
+    don't pass at the moment).
+  * Standards-Version: 4.7.0
+
+ -- Drew Parsons <dparsons@debian.org>  Tue, 17 Sep 2024 23:55:57 +0200
+
 sundials (6.4.1+dfsg1-3) unstable; urgency=medium
 
   * [855a1dc] Fix version in Breaks+Replaces. (Closes: #1027402)

@@ -1,0 +1,5 @@
+SUNDIALS_LIB=kinsol
+
+TEST_TYPES="C_openmp  F2003_parallel  serial"
+
+debian/tests/run_sundials_examples $SUNDIALS_LIB "$TEST_TYPES"

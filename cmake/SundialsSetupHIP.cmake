@@ -2,7 +2,7 @@
 # Programmer(s): Cody J. Balos @ LLNL
 # ---------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -32,9 +32,9 @@ endif()
 
 if(NOT DEFINED HIP_PLATFORM)
   if(NOT DEFINED ENV{HIP_PLATFORM})
-    set(HIP_PLATFORM "hcc" CACHE STRING "HIP platform (hcc, nvcc)")
+    set(HIP_PLATFORM "amd" CACHE STRING "HIP platform (amd, nvidia)")
   else()
-    set(HIP_PLATFORM "$ENV{HIP_PLATFORM}" CACHE STRING "HIP platform (hcc, nvcc)")
+    set(HIP_PLATFORM "$ENV{HIP_PLATFORM}" CACHE STRING "HIP platform (amd, nvidia)")
   endif()
 endif()
 
@@ -46,7 +46,7 @@ set(CMAKE_PREFIX_PATH "${ROCM_PATH};${HIP_PATH}")
 find_package(HIP REQUIRED)
 
 if("${HIP_COMPILER}" STREQUAL "hcc")
-  print_error("Deprecated HCC compiler is not supported" "Please update ROCm")
+  message(FATAL_ERROR "Deprecated HCC compiler is not supported" "Please update ROCm")
 endif()
 
 message(STATUS "HIP version:      ${HIP_VERSION}")

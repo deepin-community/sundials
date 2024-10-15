@@ -2,7 +2,7 @@
 # Programmer(s): Cody J. Balos @ LLNL
 # -----------------------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -75,7 +75,7 @@ if(<TPL>_FOUND AND (NOT <TPL>_WORKS))
     message(STATUS "Checking if <TPL> works with SUNDIALS... FAILED")
     message(STATUS "Check output: ")
     message("${COMPILE_OUTPUT}")
-    print_error("SUNDIALS interface to <TPL> is not functional.")
+    message(FATAL_ERROR "SUNDIALS interface to <TPL> is not functional.")
   endif()
 
 elseif(<TPL>_FOUND AND <TPL>_WORKS)

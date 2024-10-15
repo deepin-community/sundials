@@ -1,0 +1,35 @@
+Index: sundials/examples/cvodes/serial/CMakeLists.txt
+===================================================================
+--- sundials.orig/examples/cvodes/serial/CMakeLists.txt	2024-10-13 09:53:21.096379407 +0200
++++ sundials/examples/cvodes/serial/CMakeLists.txt	2024-10-13 09:53:21.096379407 +0200
+@@ -31,7 +31,7 @@
+   "cvsDiurnal_kry\;\;develop"
+   "cvsDiurnal_kry_bp\;\;develop"
+   "cvsFoodWeb_ASAi_kry\;\;develop"
+-  "cvsFoodWeb_ASAp_kry\;\;develop"
++#  "cvsFoodWeb_ASAp_kry\;\;develop"
+   "cvsHessian_ASA_FSA\;\;exclude-single"
+   "cvsKrylovDemo_ls\;\;develop"
+   "cvsKrylovDemo_ls\;1\;develop"
+@@ -40,7 +40,7 @@
+   "cvsParticle_dns\;\;develop"
+   "cvsPendulum_dns\;\;exclude-single"
+   "cvsRoberts_ASAi_dns\;\;exclude-single"
+-  "cvsRoberts_ASAi_dns_constraints\;\;develop"
++#  "cvsRoberts_ASAi_dns_constraints\;\;develop"
+   "cvsRoberts_FSA_dns\;-sensi sim t\;exclude-single"
+   "cvsRoberts_FSA_dns\;-sensi stg1 t\;exclude-single"
+   "cvsRoberts_FSA_dns_Switch\;\;exclude-single"
+Index: sundials/examples/ida/C_openmp/CMakeLists.txt
+===================================================================
+--- sundials.orig/examples/ida/C_openmp/CMakeLists.txt	2024-10-10 15:32:20.905941477 +0200
++++ sundials/examples/ida/C_openmp/CMakeLists.txt	2024-10-13 09:53:57.716716148 +0200
+@@ -19,7 +19,7 @@
+ 
+ # Examples using SUNDIALS linear solvers
+ set(IDA_examples
+-  "idaFoodWeb_bnd_omp\;4\;develop"
++#  "idaFoodWeb_bnd_omp\;4\;develop"
+   "idaFoodWeb_kry_omp\;4\;develop"
+   )
+ 

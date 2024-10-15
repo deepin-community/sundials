@@ -1,0 +1,26 @@
+Index: sundials/src/sundials/fmod_int32/CMakeLists.txt
+===================================================================
+--- sundials.orig/src/sundials/fmod_int32/CMakeLists.txt	2024-09-01 23:08:52.692995691 +0200
++++ sundials/src/sundials/fmod_int32/CMakeLists.txt	2024-09-17 18:28:58.886970994 +0200
+@@ -22,4 +22,8 @@
+ sundials_add_f2003_library(sundials_fcore_mod
+   SOURCES
+     ${sundials_SOURCES}
++  VERSION
++    ${sundialslib_VERSION}
++  SOVERSION
++    ${sundialslib_SOVERSION}
+ )
+Index: sundials/src/sundials/fmod_int64/CMakeLists.txt
+===================================================================
+--- sundials.orig/src/sundials/fmod_int64/CMakeLists.txt	2024-09-01 23:08:52.692995691 +0200
++++ sundials/src/sundials/fmod_int64/CMakeLists.txt	2024-09-17 18:29:20.819214062 +0200
+@@ -22,4 +22,8 @@
+ sundials_add_f2003_library(sundials_fcore_mod
+   SOURCES
+     ${sundials_SOURCES}
++  VERSION
++    ${sundialslib_VERSION}
++  SOVERSION
++    ${sundialslib_SOVERSION}
+ )
