@@ -1,2 +1,0 @@
-libsundials-sunmatrix2 binary: package-name-doesnt-match-sonames
-libsundials-sunmatrix2 binary: library-not-linked-against-libc

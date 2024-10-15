@@ -1,0 +1,5 @@
+SUNDIALS_LIB=sunnonlinsol
+
+TEST_TYPES="fixedpoint  newton  petscsnes"
+
+debian/tests/run_sundials_examples $SUNDIALS_LIB "$TEST_TYPES"

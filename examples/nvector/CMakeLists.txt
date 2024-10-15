@@ -3,7 +3,7 @@
 #                Cody Balos @ LLNL
 # ---------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -34,7 +34,9 @@ target_link_libraries(test_nvector_obj PRIVATE sundials_nvecserial)
 
 if(ENABLE_MPI AND MPI_C_FOUND)
   add_subdirectory(parallel)
-  add_subdirectory(mpimanyvector)
+  if(BUILD_NVECTOR_MPIMANYVECTOR)
+    add_subdirectory(mpimanyvector)
+  endif()
   add_subdirectory(mpiplusx)
   # Build the mpi nvector test utilities
   add_library(test_nvectormpi_obj OBJECT test_mpinvector.c)
@@ -43,7 +45,9 @@ if(ENABLE_MPI AND MPI_C_FOUND)
   endif()
   target_link_libraries(test_nvectormpi_obj PRIVATE MPI::MPI_C sundials_nvecparallel)
 endif()
-add_subdirectory(manyvector)
+if(BUILD_NVECTOR_MANYVECTOR)
+  add_subdirectory(manyvector)
+endif()
 
 if(BUILD_NVECTOR_PARHYP)
   add_subdirectory(parhyp)

@@ -1,0 +1,25 @@
+set -e
+
+SUNDIALS_LIB=$1
+TEST_TYPES="$2"
+if [ "x$SUNDIALS_LIB" = "x" ]; then
+    SUNDIALS_LIB=arkode
+    TEST_TYPES=CXX_serial
+elif [ "x$TEST_TYPES" = "x" ]; then
+    echo "Provide test type (subdir of $SUNDIALS_LIB)"
+    exit 1
+fi
+
+echo "running SUNDIALS tests for $SUNDIALS_LIB\n"
+
+cp -r /usr/share/doc/libsundials-dev/examples/$SUNDIALS_LIB $AUTOPKGTEST_TMP
+cd $AUTOPKGTEST_TMP/$SUNDIALS_LIB
+TESTDIR=`pwd`
+
+for test_type in $TEST_TYPES; do
+    echo "\nrunning $SUNDIALS_LIB/$test_type"
+    cd $TESTDIR/$test_type
+    cmake .
+    make
+    make test
+done

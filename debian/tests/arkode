@@ -1,27 +1,5 @@
-#!/bin/sh
-# (C) 2021 Anton Gladky
+SUNDIALS_LIB=arkode
 
-set -e
+TEST_TYPES="C_manyvector  C_openmp  C_petsc  CXX_parallel  CXX_serial  F2003_custom"
 
-WORKDIR=$(mktemp -d)
-trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
-mkdir -p $WORKDIR/src
-mkdir -p $WORKDIR/build
-
-cp examples/arkode/CXX_serial/* $WORKDIR/src/
-
-cd $WORKDIR/build
-g++ ../src/ark_analytic_sys.cpp -lsundials_sunmatrixdense -lsundials_nvecserial -lsundials_arkode -o demo1
-g++ ../src/ark_heat2D.cpp -lsundials_sunmatrixdense -lsundials_nvecserial -lsundials_arkode -o demo2
-
-echo "build: OK"
-
-[ -x demo1 ]
-./demo1
-
-echo "run: demo1 OK"
-
-[ -x demo2 ]
-./demo2
-
-echo "run: demo2 OK"
+debian/tests/run_sundials_examples $SUNDIALS_LIB "$TEST_TYPES"

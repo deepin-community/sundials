@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -11,8 +11,8 @@
 # -----------------------------------------------------------------------------
 
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath('../../../shared/versions.py')))
-from versions import *
+sys.path.append(os.path.dirname(os.path.abspath('../../../shared/sundials_vars.py')))
+from sundials_vars import *
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -403,9 +403,9 @@ contributions.\\
 Other contributors to SUNDIALS include: James Almgren-Bell, Lawrence E. Banks,
 Peter N. Brown, George Byrne, Rujeko Chinomona, Scott D. Cohen, Aaron Collier,
 Keith E. Grant, Steven L. Lee, Shelby L. Lockhart, John Loffeld, Daniel McGreer,
-Slaven Peles, Cosmin Petra, H. Hunter Schwartz, Jean M. Sexton,
-Dan Shumaker, Steve G. Smith, Allan G. Taylor, Hilari C. Tiedeman, Chris White,
-Ting Yan, and Ulrike M. Yang.
+Yu Pan, Slaven Peles, Cosmin Petra, Steven B. Roberts, H. Hunter Schwartz,
+Jean M. Sexton, Dan Shumaker, Steve G. Smith, Shahbaj Sohal, Allan G. Taylor,
+Hilari C. Tiedeman, Chris White, Ting Yan, and Ulrike M. Yang.
 \clearpage
 
 % clear empty double page

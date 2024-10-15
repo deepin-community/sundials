@@ -2,7 +2,7 @@
 # Programmer(s): Cody J. Balos @ LLNL
 # -----------------------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2022, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -38,17 +38,17 @@ endif()
 
 # SuperLU_DIST only supports double precision
 if(SUNDIALS_PRECISION MATCHES "SINGLE" OR SUNDIALS_PRECISION MATCHES "EXTENDED")
-  print_error("SuperLU_DIST is not compatible with ${SUNDIALS_PRECISION} precision")
+  message(FATAL_ERROR "SuperLU_DIST is not compatible with ${SUNDIALS_PRECISION} precision")
 endif()
 
 # Using SUPERLUDIST requires building with MPI enabled
 if(ENABLE_SUPERLUDIST AND NOT ENABLE_MPI)
-  print_error("MPI is required for SuperLU DIST support. Set ENABLE_MPI to ON.")
+  message(FATAL_ERROR "MPI is required for SuperLU DIST support. Set ENABLE_MPI to ON.")
 endif()
 
 # Using SUPERLUDIST with OpenMP requires building with OpenMP enabled
 if(ENABLE_SUPERLUDIST AND SUPERLUDIST_OpenMP AND NOT ENABLE_OPENMP)
-  print_error("OpenMP is required for SuperLU DIST support. Set ENABLE_OPENMP to ON.")
+  message(FATAL_ERROR "OpenMP is required for SuperLU DIST support. Set ENABLE_OPENMP to ON.")
 endif()
 
 # -----------------------------------------------------------------------------
@@ -68,7 +68,6 @@ message(STATUS "SUPERLUDIST_INDEX_SIZE:     ${SUPERLUDIST_INDEX_SIZE}")
 message(STATUS "SUPERLUDIST_OpenMP:         ${SUPERLUDIST_OpenMP}")
 message(STATUS "SUPERLUDIST_CUDA:           ${SUPERLUDIST_CUDA}")
 message(STATUS "SUPERLUDIST_ROCM:           ${SUPERLUDIST_ROCM}")
-
 
 # -----------------------------------------------------------------------------
 # Section 4: Test the TPL
